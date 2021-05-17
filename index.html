@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Ryan Po-Hsuan Chang (ryanxuan930)">
+<meta name="description" content="NSYSU Courses 0.1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.11/vue.global.prod.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>NSYSU Courses</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script id="form_ch" type="text/x-template">
+        <div id="header"></div>
+        <div class="content_box shadow">
+            <form>
+                <div class="form_section">年度/學期：
+                    <select v-model="semester">
+                        <option value="1092"  selected>109下</option>
+                    </select>
+                </div>
+                <div class="form_section">
+                    <label>系所：
+                        <select v-model="degree">
+                            <option value="*"  selected>全選</option><option value="A">其他</option><option value="B">大學部</option><option value="M">碩士班</option><option value="N">碩專班</option><option value="P">博士班</option>
+                        </select>
+                        <select v-model="department">
+                            <option value=""  selected>全選</option><option value="3333">暑期課程</option><option value="AB00">教育學程</option><option value="AB0A">中學學程</option><option value="AB0B">小學學程</option><option value="AB1B">傳播學程</option><option value="AB1C">數理學程</option><option value="AB1D">碩財務學程</option><option value="AB1E">材料學程</option><option value="AB1F">生技學程</option><option value="AB1H">歷史學程</option><option value="AB1I">環境學程</option><option value="AB1J">碩商務學程</option><option value="AB1K">交換學程</option><option value="AB1M">台語文學程</option><option value="AB1N">國際學程</option><option value="AB1O">軟體學程</option><option value="AB1P">碩創業學程</option><option value="AB1Q">奈米學程</option><option value="AB1R">藝術學程</option><option value="AB1T">知識學程</option><option value="AB1U">晶片學程</option><option value="AB1V">鋼鐵學程</option><option value="AB1X">日文學程</option><option value="AB2C">多樣性學程</option><option value="AB2D">樂療學程</option><option value="ABA1">外籍華語</option><option value="ABB0">進修英文</option><option value="AC1A">國語文</option><option value="AC1A">基礎(中文)</option><option value="AC1B">國語文</option><option value="AC1C">國語文</option><option value="AC1D">中文思辨與表達</option><option value="AC2A">基礎(外文)</option><option value="AC2B">英文1級</option><option value="AC2B">英文一級</option><option value="AC2C">英文2級</option><option value="AC2C">英文二級</option><option value="AC2D">英文31級</option><option value="AC2D">基礎(外文31)</option><option value="AC2E">基礎(外文32)</option><option value="AC2G">英文1級</option><option value="AC2H">英文2級</option><option value="AC2I">英文31級</option><option value="AC2J">英文32級</option><option value="AC2K">英文初級</option><option value="AC2L">英文中級</option><option value="AC2M">英文中高級</option><option value="AC2N">英文高級</option><option value="AC2O">英語文(選)</option><option value="AC3A">基礎(資訊)</option><option value="AC4A">基礎(生法)</option><option value="AC5A">基礎(健教)</option><option value="AC6A">基礎(體育)</option><option value="AC6A">體育(必)</option><option value="AC6B">選修體育</option><option value="AC6B">體育(選)</option><option value="AC6C">夜體育</option><option value="AC6D">運動健康(必)</option><option value="AC6E">運動健康(選)</option><option value="AC6F">運動健康(必)</option><option value="AC6G">運動健康(選)</option><option value="AC6H">運動健康(必)</option><option value="AC6I">運動進階(選)</option><option value="AC7A">基礎(憲法)</option><option value="AC8A">選修軍訓</option><option value="AC8B">夜軍訓室</option><option value="AC8C">基礎(軍訓)</option><option value="AC8C">基礎軍訓</option><option value="AC9A">興趣選修</option><option value="AC9B">通識中心</option><option value="AC9B">通識輔助</option><option value="AC9C">興趣選修</option><option value="AD01">共同必修</option><option value="AD02">共同必修</option><option value="AD03">共同必修</option><option value="AD04">共同必修</option><option value="AE01">通識教育(向度)</option><option value="AE02">通識教育(核心、深化)</option><option value="AF01">校際(學士班)</option><option value="AF01">校際選課</option><option value="AF02">校際(研究所)</option><option value="AF02">校際選課</option><option value="AG01">普通物理小組</option><option value="AH01">應用性課程</option><option value="AI00">跨院選修(通)</option><option value="AI01">跨院選修(文)</option><option value="AI02">跨院選修(理)</option><option value="AI03">跨院選修(工)</option><option value="AI04">跨院選修(管)</option><option value="AI05">跨院選修(海)</option><option value="AI06">跨院選修(社)</option><option value="ASE0">服務課程</option><option value="ASE0">服務學習</option><option value="ASE1">服務學習</option><option value="ASE2">服務學習</option><option value="B100">文學院（全）</option><option value="B101">中文系</option><option value="B102">外文系</option><option value="B103">音樂系</option><option value="B106">劇場系</option><option value="B106">劇藝系</option><option value="B10A">文學院</option><option value="B200">理學院（全）</option><option value="B201">生科系</option><option value="B202">化學系</option><option value="B203">物理系</option><option value="B204">應數系</option><option value="B20A">理學院</option><option value="B298">生物系</option><option value="B300">工學院（全）</option><option value="B301">電機系</option><option value="B302">機電系</option><option value="B304">資工系</option><option value="B308">材光系</option><option value="B309">光電系</option><option value="B30A">工學院</option><option value="B310">材光系</option><option value="B398">機械系</option><option value="B400">管理學院（全）</option><option value="B401">企管系</option><option value="B402">資管系</option><option value="B403">財管系</option><option value="B40A">管理學院</option><option value="B500">海洋科學院（全）</option><option value="B502">海資系</option><option value="B504">海工系</option><option value="B509">海科系</option><option value="B50A">海科院（學）</option><option value="B561">海洋學程</option><option value="B597">海資系</option><option value="B599">海環系</option><option value="B600">社會科學院（全）</option><option value="B606">政經系</option><option value="B609">社會系</option><option value="B60A">社科院</option><option value="B70A">西灣學院</option><option value="B761">人科學程</option><option value="C102">外文專班</option><option value="C401">企企專班</option><option value="C402">資管專班</option><option value="C403">財管專班</option><option value="C405">人管專班</option><option value="C411">企會專班</option><option value="E101">夜中文</option><option value="E102">夜外文</option><option value="E401">夜企管</option><option value="E402">夜資管</option><option value="M101">中文碩</option><option value="M102">外文碩</option><option value="M103">音樂碩</option><option value="M104">藝管碩</option><option value="M105">哲學碩</option><option value="M106">劇藝碩</option><option value="M107">劇藝碩</option><option value="M10A">文學院(碩)</option><option value="M201">生科碩</option><option value="M202">化學碩</option><option value="M203">物理碩</option><option value="M204">應數碩</option><option value="M205">生醫碩</option><option value="M206">醫科碩</option><option value="M207">生技醫藥碩</option><option value="M208">精準醫學碩</option><option value="M299">生科碩</option><option value="M301">電機碩</option><option value="M302">機電碩</option><option value="M303">環工碩</option><option value="M304">資工碩</option><option value="M305">光電碩</option><option value="M306">材料碩</option><option value="M307">通訊碩</option><option value="M309">光電碩</option><option value="M310">材光碩</option><option value="M314">資安碩</option><option value="M320">前瞻應材</option><option value="M361">電機電力碩</option><option value="M362">電信碩程</option><option value="M398">機械碩</option><option value="M401">企管碩</option><option value="M402">資管碩</option><option value="M403">財管碩</option><option value="M404">公事碩</option><option value="M405">人管碩</option><option value="M406">傳管碩</option><option value="M407">醫管碩</option><option value="M408">行銷傳播碩</option><option value="M40A">管理學院(碩)</option><option value="M411">企企管碩</option><option value="M421">企醫管碩</option><option value="M461">國際經營學程</option><option value="M462">醫管學程</option><option value="M465">人管英語碩程</option><option value="M481">金融創新產碩</option><option value="M501">海生碩</option><option value="M502">海資碩</option><option value="M503">海地化碩</option><option value="M504">海工碩</option><option value="M505">海下碩</option><option value="M506">海物碩</option><option value="M507">海事碩</option><option value="M508">海下物碩</option><option value="M509">海科碩</option><option value="M50A">海科院（碩）</option><option value="M510">海下科技碩</option><option value="M511">海生保育碩</option><option value="M514">離岸風電碩</option><option value="M599">海環碩</option><option value="M601">中山碩</option><option value="M602">政治碩</option><option value="M603">大陸碩</option><option value="M604">經濟碩</option><option value="M605">教育碩</option><option value="M607">亞太碩</option><option value="M608">社會碩</option><option value="M609">社會碩</option><option value="M661">亞太英語碩程</option><option value="M662">教人全英碩</option><option value="N101">中文夜碩專</option><option value="N201">生科碩專</option><option value="N203">物理碩專</option><option value="N205">生醫碩專</option><option value="N301">電機碩專</option><option value="N302">機電碩專</option><option value="N303">環工碩專</option><option value="N351">機電產研</option><option value="N352">電機IC產研</option><option value="N352">電機產研</option><option value="N353">電機寬頻產研</option><option value="N354">光電產研</option><option value="N401">企管碩專</option><option value="N402">資管碩專</option><option value="N403">財管碩專</option><option value="N404">公事碩專</option><option value="N405">人管碩專</option><option value="N406">傳管碩專</option><option value="N408">行傳碩專</option><option value="N411">企英碩專</option><option value="N412">資商碩專</option><option value="N414">公碩專(澎)</option><option value="N415">人企碩專</option><option value="N422">電商碩專</option><option value="N425">人企碩專</option><option value="N435">人亞碩專</option><option value="N451">EMBA碩專</option><option value="N452">IEMBA碩專</option><option value="N453">中山同濟EMBA</option><option value="N504">海工碩專</option><option value="N551">海生碩專</option><option value="N601">中山碩專</option><option value="N602">政治碩專</option><option value="N603">大陸碩專</option><option value="N604">經濟碩專</option><option value="N605">教育碩專</option><option value="N607">亞太碩專</option><option value="N609">社會原碩專</option><option value="N615">教育碩專</option><option value="N617">軍行管專班</option><option value="N651">EMPP碩專</option><option value="O101">中文暑碩專</option><option value="O101">中暑碩專</option><option value="P101">中文博</option><option value="P102">外文博</option><option value="P201">生科博</option><option value="P202">化學博</option><option value="P203">物理博</option><option value="P204">應數博</option><option value="P205">生醫博</option><option value="P206">醫科博</option><option value="P261">加速博學程</option><option value="P262">加速博學程</option><option value="P263">理學博</option><option value="P299">生科博</option><option value="P301">電機博</option><option value="P302">機電博</option><option value="P303">環工博</option><option value="P304">資工博</option><option value="P305">光電博</option><option value="P306">材料博</option><option value="P307">通訊博</option><option value="P309">光電博</option><option value="P310">材光博</option><option value="P314">資工資安博</option><option value="P398">機械博</option><option value="P401">企管博</option><option value="P402">資管博</option><option value="P403">財管博</option><option value="P404">公事博</option><option value="P405">人管博</option><option value="P421">企醫管博</option><option value="P501">海生博</option><option value="P502">海資博</option><option value="P503">海地化博</option><option value="P504">海工博</option><option value="P509">海科博</option><option value="P562">海生科技博士學程</option><option value="P601">中山博</option><option value="P602">政治博</option><option value="P603">大陸博</option><option value="P605">教育博</option><option value="P607">亞太博</option><option value="P661">教人全英博</option><option value="Z502">學分班</option><option value="Z541">學分班</option><option value="Z542">學分班</option><option value="Z543">學分班</option><option value="Z544">學分班</option><option value="Z545">高階經營班</option><option value="Z546">高階經營班</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form_section">
+                    <label>年級：
+                        <select v-model="grade">
+                            <option value="" selected>全選</option><option value="1">一</option><option value="2">二</option><option value="3">三</option><option value="4">四</option><option value="5">五</option>
+                        </select>
+                    <label>
+                    <label>班級：
+                        <select v-model="class_type">
+                            <option value="" selected>全選</option><option value="1">甲</option><option value="2">乙</option>
+                        </select>
+                    <label>
+                    <label>組別：
+                        <select v-model="group">
+                            <option value="" selected>全選</option><option value="N4521">國際企業組</option><option value="N4522">生技管理組</option><option value="N6051">教學組</option><option value="N6052">學校行政組</option><option value="P4011">企業管理組</option><option value="P4012">經營管理組</option><option value="P4051">學術專業組</option><option value="P4052">產學組</option>
+                        </select>
+                    <label>
+    
+                </div>
+                <div class="form_section">授課老師：
+                    <input v-model="teacher" type="text">
+                </div>
+                <div class="form_section">課程代號：
+                    <input v-model="course_id" type="text">
+                </div>
+                <div class="form_section">課程名稱：
+                    <input v-model="course_name" type="text">
+                </div>
+                <div class="form_section">上課時間：
+                    <select v-model="course_day">
+                        <option value="" selected>全選</option><option value="1">星期一</option><option value="2">星期二</option><option value="3">星期三</option><option value="4">星期四</option><option value="5">星期五</option><option value="6">星期六</option><option value="7">星期日</option>
+                    </select>
+                    <select v-model="course_time">
+                        <option value="" selected>全選</option><option value="A">A&nbsp;[07:00-07:50]</option><option value="1">1&nbsp;[08:10-09:00]</option><option value="2">2&nbsp;[09:10-10:00]</option><option value="3">3&nbsp;[10:10-11:00]</option><option value="4">4&nbsp;[11:10-12:00]</option><option value="B">B&nbsp;[12:10-13:00]</option><option value="5">5&nbsp;[13:10-14:00]</option><option value="6">6&nbsp;[14:10-15:00]</option><option value="7">7&nbsp;[15:10-16:00]</option><option value="8">8&nbsp;[16:10-17:00]</option><option value="9">9&nbsp;[17:10-18:00]</option><option value="C">C&nbsp;[18:20-19:10]</option><option value="D">D&nbsp;[19:15-20:05]</option><option value="E">E&nbsp;[20:10-21:00]</option><option value="F">F&nbsp;[21:05-21:55]</option>
+                    </select>
+                </div>
+                <div class="form_section">查詢項目：
+                    <select v-model="inquery_type">
+                        <option value="1">課程時間</option><option value="2">修課項目</option>
+                    </select>
+                    <label>
+                        <input v-model="in_english" type="checkbox">&nbsp;英語授課
+                    </label>
+                    <label>
+                        <input v-model="availability" type="checkbox">&nbsp;名額未滿
+                    </label>
+                </div>
+                <div class="form_section">驗證碼：
+                    <input v-model="validation" type="text">
+                    <img src="https://selcrs.nsysu.edu.tw/menu1/validcode.asp">
+                </div>
+                <div class="form_section"><button @click.stop.prevent="submitForm">送出</button></div>
+            </form>
+        </div>
+    </script>
+    <script>
+        const titleList = {"tw": "課程查詢", "en":"Courses Inquiry"};
+
+        const app = Vue.createApp({
+            template: '<app-title :title-lang="lang_code" /><app-form-ch v-if="this.lang_code==\'tw\'" /><app-form-en v-if="this.lang_code==\'en\'" /><app-content />',
+            data() {
+                return {
+                    lang_code: "tw", 
+                }
+            },
+        });
+        app.component('app-title',{
+            template: '<div class="banner shadow"><div id="title">{{title}}</div></div>',
+            data() {
+                return {
+                    title: "",
+                }
+            },
+            props: ["titleLang"],
+            methods: {
+                fetchLang(){
+                    this.title = titleList[this.titleLang];
+                }
+            },
+            beforeMount(){
+                this.fetchLang();
+            },
+            beforeUpdate(){
+                this.fetchLang();
+            }
+        });
+        app.component('app-form-ch',{
+            template: "#form_ch",
+            data(){
+                return {
+                    semester: "",
+                    degree: "*",
+                    department: "",
+                    grade: "",
+                    class_type: "",
+                    group: "",
+                    teacher: "",
+                    course_id: "",
+                    course_name: "",
+                    course_day: "",
+                    course_time: "",
+                    inquery_type: 1,
+                    in_english: "",
+                    availability: "",
+                    validation: "",
+                }
+            },
+            methods: {
+                submitForm(){
+                    var _this = this;
+                    $.post("https://selcrs.nsysu.edu.tw/menu1/dplycourse.asp?eng=",{HIS: 1,IDNO: "", ITEM:"",D0: _this.semester, DEG_COD: _this.degree, D1: _this.department, D2: _this.grade, CLASS_COD: _this.class_type, SECT_COD: _this.group, TYP: _this.inquery_type, teacher: _this.teacher, crsname: _this.course_name, T3: _this.course_id, WKDAY: _this.course_day, SECT: _this.course_time, ValidCode: _this.validation, nowhis: 1, B1: ""},function(data){
+                        console.log(data);
+                    });
+                }
+            }
+        });
+        app.component('app-form-en',{
+            template: "#form_en"
+        });
+        app.mount('#app');
+        $("#header").height($(".banner").outerHeight());
+    </script>
+</body>
+</html>
