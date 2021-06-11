@@ -143,7 +143,7 @@
             methods: {
                 submitForm(){
                     var _this = this;
-                    $.post("https://selcrs.nsysu.edu.tw/menu1/dplycourse.asp?eng=",{HIS: 1,IDNO: "", ITEM:"",D0: _this.semester, DEG_COD: _this.degree, D1: _this.department, D2: _this.grade, CLASS_COD: _this.class_type, SECT_COD: _this.group, TYP: _this.inquery_type, teacher: _this.teacher, crsname: _this.course_name, T3: _this.course_id, WKDAY: _this.course_day, SECT: _this.course_time, ValidCode: _this.validation, nowhis: 1, B1: ""},function(data){
+                    $.post("https://cors-anywhere.herokuapp.com/https://selcrs.nsysu.edu.tw/menu1/dplycourse.asp?eng=",{HIS: 1,IDNO: "", ITEM:"",D0: _this.semester, DEG_COD: _this.degree, D1: _this.department, D2: _this.grade, CLASS_COD: _this.class_type, SECT_COD: _this.group, TYP: _this.inquery_type, teacher: _this.teacher, crsname: _this.course_name, T3: _this.course_id, WKDAY: _this.course_day, SECT: _this.course_time, ValidCode: _this.validation, nowhis: 1, B1: ""},function(data){
                         console.log(data);
                     });
                 }
