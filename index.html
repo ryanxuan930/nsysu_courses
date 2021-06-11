@@ -15,6 +15,7 @@
 </head>
 <body>
     <div id="app"></div>
+    <div id="frame"></div>
     <script id="form_ch" type="text/x-template">
         <div id="header"></div>
         <div class="content_box shadow">
@@ -22,6 +23,7 @@
                 <div class="form_section">年度/學期：
                     <select v-model="semester">
                         <option value="1092"  selected>109下</option>
+                        <option value="109w"  selected>109暑期</option>
                     </select>
                 </div>
                 <div class="form_section">
@@ -82,9 +84,12 @@
                 </div>
                 <div class="form_section">驗證碼：
                     <input v-model="validation" type="text">
-                    <img src="https://selcrs.nsysu.edu.tw/menu1/validcode.asp">
+                    <img :src="pic_url">
                 </div>
-                <div class="form_section"><button @click.stop.prevent="submitForm">送出</button></div>
+                <div class="form_section">
+                    <button class="form_button" @click.stop.prevent="submitForm">送出</button>
+                    <button class="form_button" @click.stop.prevent="newPicture">重新產生</button>
+                </div>
             </form>
         </div>
     </script>
@@ -123,7 +128,7 @@
             template: "#form_ch",
             data(){
                 return {
-                    semester: "",
+                    semester: "1092",
                     degree: "*",
                     department: "",
                     grade: "",
@@ -138,16 +143,23 @@
                     in_english: "",
                     availability: "",
                     validation: "",
+                    pic_url: "",
                 }
             },
             methods: {
                 submitForm(){
-                    var _this = this;
-                    $.post("https://cors-anywhere.herokuapp.com/https://selcrs.nsysu.edu.tw/menu1/dplycourse.asp?eng=",{HIS: 1,IDNO: "", ITEM:"",D0: _this.semester, DEG_COD: _this.degree, D1: _this.department, D2: _this.grade, CLASS_COD: _this.class_type, SECT_COD: _this.group, TYP: _this.inquery_type, teacher: _this.teacher, crsname: _this.course_name, T3: _this.course_id, WKDAY: _this.course_day, SECT: _this.course_time, ValidCode: _this.validation, nowhis: 1, B1: ""},function(data){
-                        console.log(data);
+                    var _this = this, b1="%B6%7D%A9l%ACd%B8%DF";
+                    $.post("https://cors-anywhere.herokuapp.com/https://selcrs.nsysu.edu.tw/menu1/dplycourse.asp?eng=",{HIS: 1,IDNO: "", ITEM:"",D0: _this.semester, DEG_COD: _this.degree, D1: _this.department, D2: _this.grade, CLASS_COD: _this.class_type, SECT_COD: _this.group, TYP: _this.inquery_type, teacher: _this.teacher, crsname: _this.course_name, T3: _this.course_id, WKDAY: _this.course_day, SECT: _this.course_time, ValidCode: _this.validation, nowhis: 1, B1: b1},function(data){
+                        $("#frame").html(data);
                     });
+                },
+                newPicture(){
+                    this.pic_url = "https://selcrs.nsysu.edu.tw/menu1/validcode.asp?epoch=" + Date.now();
                 }
-            }
+            },
+            created() {
+                this.newPicture();
+            },
         });
         app.component('app-form-en',{
             template: "#form_en"

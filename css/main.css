@@ -69,3 +69,11 @@ hr{
     border-radius: 5px;
     color: #505050;
 }
+
+.form_button {
+    padding: 5px 10px;
+    margin-right: 10px;
+    background-color: rgb(10,132,255);
+    border-radius: 5px;
+    color: white;
+}
